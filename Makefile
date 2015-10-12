@@ -61,6 +61,7 @@ PROGS       := \
   link \
   hashsum \
   ln \
+  ls \
   mkdir \
   nl \
   nproc \

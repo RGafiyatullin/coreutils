@@ -1,0 +1,12 @@
+
+[package]
+name = "ls"
+version = "0.0.1"
+authors = []
+
+[lib]
+name = "ls"
+path = "ls.rs"
+
+[dependencies]
+getopts = "*"

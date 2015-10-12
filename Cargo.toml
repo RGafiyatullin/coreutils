@@ -36,6 +36,7 @@ all = [
     "link",
     "ln",
     "logname",
+    "ls",
     "mkdir",
     "mkfifo",
     "mv",
@@ -112,6 +113,7 @@ kill     = { optional=true, path="src/kill" }
 link     = { optional=true, path="src/link" }
 ln       = { optional=true, path="src/ln" }
 logname  = { optional=true, path="src/logname" }
+ls       = { optional=true, path="src/ls" }
 mkdir    = { optional=true, path="src/mkdir" }
 mkfifo   = { optional=true, path="src/mkfifo" }
 mv       = { optional=true, path="src/mv" }
