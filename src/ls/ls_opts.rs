@@ -1,5 +1,20 @@
+/*
+ * This file is part of the uutils coreutils package.
+ *
+ * (c) Roman Gafiyatullin <r.gafiyatullin@me.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-use getopts::{Options, Matches, ParsingStyle};
+//!
+//! All the options provided to the `ls` can be divided in several major groups:
+//! * input filters (-a, -A, -B, ...) [is '-d' one of these?]
+//! * output sorting ( --sort _, -U, -S, -t, -v, -X, ... )
+//! * output format (--format _, -x, -m, -l, -1, -C, ...)
+//!
+
+use getopts::{Options, Matches, Fail, ParsingStyle};
 
 pub fn do_getopts( args: &Vec<String> ) -> (Options, Result<Matches, Fail>) {
 	let mut opts = Options::new();
