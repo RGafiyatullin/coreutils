@@ -1,3 +1,12 @@
+/*
+ * This file is part of the uutils coreutils package.
+ *
+ * (c) Roman Gafiyatullin <r.gafiyatullin@me.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 
 use getopts::Matches;
 
@@ -22,6 +31,12 @@ impl InputConfig {
 #[derive(Debug)]
 pub struct OutputConfig;
 
+impl OutputConfig {
+	pub fn new() -> Self {
+		OutputConfig
+	}
+}
+
 pub fn input_config( matches: &Matches ) -> Result<InputConfig, String> {
 	let mut cfg = InputConfig::new();
 
@@ -39,5 +54,7 @@ pub fn input_config( matches: &Matches ) -> Result<InputConfig, String> {
 	Ok( cfg )
 }
 pub fn output_config( matches: &Matches ) -> Result<OutputConfig, String> {
-	Err("output_config: Not implemented".to_string())
+	let mut cfg = OutputConfig::new();
+
+	Ok( cfg )
 }

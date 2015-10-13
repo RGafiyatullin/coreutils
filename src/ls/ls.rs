@@ -16,6 +16,7 @@ extern crate getopts;
 mod util;
 mod ls_opts;
 mod ls_config;
+mod ls_process;
 
 use std::io::Write;
 use std::fmt::Debug;
@@ -37,10 +38,17 @@ pub fn uumain(args: Vec<String>) -> i32 {
 	let output_config = main_ensure_config_or_exit( maybe_output_config );
 	debug_maybe_dump_config( "LS_DEBUG_OUTPUT_CONFIG", &output_config );
 
+	let mut minor_problems_took_place = false;
+	let mut major_problems_took_place = false;
+	for file in matches.free {
+		let (minor_problem, major_problem) = ls_process::process_file( &input_config, &output_config, &file );
+		minor_problems_took_place |= minor_problem;
+		major_problems_took_place |= major_problem;
+	}
 
-	// for file in matches.free { process_file( &input_config, &output_config, &file ) }
-
-	crash!( 127, "Just a placeholder for now" );
+	if major_problems_took_place { 2 }
+	else if minor_problems_took_place { 1 }
+	else { 0 }
 }
 
 fn main_ensure_opt_matches_or_exit( maybe_matches: Result<Matches, Fail> ) -> Matches {
