@@ -41,14 +41,25 @@ pub fn uumain(args: Vec<String>) -> i32 {
 	let mut minor_problems_took_place = false;
 	let mut major_problems_took_place = false;
 	for file in matches.free {
-		let (minor_problem, major_problem) = ls_process::process_file( &input_config, &output_config, &file );
-		minor_problems_took_place |= minor_problem;
-		major_problems_took_place |= major_problem;
+		match ls_process::process_file( &input_config, &output_config, &file ) {
+			Ok( () ) => (),
+			Err( ls_error ) => {
+					main_print_error_message( &file, &ls_error );
+					if ls_error.is_major() { major_problems_took_place = true; }
+					else { minor_problems_took_place = true; }
+				},
+		}
 	}
 
 	if major_problems_took_place { 2 }
 	else if minor_problems_took_place { 1 }
 	else { 0 }
+}
+
+fn main_print_error_message( file: &String, error: &ls_process::LsError ) {
+	use std::io::stderr;
+
+	writeln!(&mut stderr(), "ls: {}: {}", file, error.description());
 }
 
 fn main_ensure_opt_matches_or_exit( maybe_matches: Result<Matches, Fail> ) -> Matches {

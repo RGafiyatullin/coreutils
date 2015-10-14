@@ -15,6 +15,7 @@ pub struct InputConfig {
 	pub filter_hide_dot_files: bool,
 	pub filter_hide_parent_and_current: bool,
 	pub filter_hide_tilda_files: bool,
+	pub treat_directories_as_files: bool,
 }
 
 impl InputConfig {
@@ -23,6 +24,7 @@ impl InputConfig {
 			filter_hide_dot_files: true,
 			filter_hide_parent_and_current: true,
 			filter_hide_tilda_files: false,
+			treat_directories_as_files: false,
 		}
 	}
 }
